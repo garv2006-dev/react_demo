@@ -1,26 +1,45 @@
 import './App.css';
-import Demo from './page/demo';
-import { createBrowserRouter } from "react-router-dom";
-import { RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Home from './page/home';
+import Demo from './page/demo';
 import Contact from './page/contact';
-function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Home />
-    },
-    {
-      path: "/about",
-      element: <Demo />
-    },
-    {
-      path: "/contact",
-      element: <Contact />
-    }
-  ])
+import Header from './layout/header';
+import Footer from './layout/footer';
+
+function Layout() {
   return (
-    <div>
+    <>
+      <Header />
+      <Outlet />
+      <Footer />
+    </>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />
+      },
+      {
+        path: "/about",
+        element: <Demo />
+      },
+      {
+        path: "/contact",
+        element: <Contact />
+      }
+    ]
+  }
+])
+
+function App() {
+  return (
+    <div className="App">
       <RouterProvider router={router} />
     </div>
   );
