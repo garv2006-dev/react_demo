@@ -1,13 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 
 export default function Demo() {
-    const [login, setLogin] = useState(true)
+
 
     return (
         <div>
-            <h1>{login ? "welcome to our website" : "Please login"}</h1>
-            <button onClick={() => setLogin(!login)}>{login ? "Logout" : "Login"}</button>
+            <h1>Demo Page</h1>
+            <button><Link to="/">Back</Link></button>
         </div>
     )
 }   
