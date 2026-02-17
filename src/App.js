@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
 import Home from './page/home';
 import Demo from './page/demo';
+
 import Contact from './page/contact';
 import Header from './layout/header';
 import Footer from './layout/footer';
@@ -25,6 +26,8 @@ function Layout() {
   );
 }
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,12 +39,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/demo",
-        element: <ProtectedRoute><Demo /></ProtectedRoute>
+        element: <Demo />
       },
       {
         path: "/contact",
         element: <Contact />
-      }
+      },
+
     ]
   },
   {

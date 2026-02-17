@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
+import Logo from '../components/Logo'
+
 export default function Header() {
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
@@ -16,8 +18,8 @@ export default function Header() {
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex-shrink-0 flex items-center">
-                        <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                            MyBrand
+                        <Link to="/">
+                            <Logo />
                         </Link>
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
