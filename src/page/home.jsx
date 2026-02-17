@@ -7,7 +7,7 @@ export default function Home() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
                 <div className="text-center space-y-10">
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-bold mb-4 animate-bounce">
-                        ✨ New: Modern React Components
+                        ✨ New: Modern React
                     </div>
                     <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight">
                         <span className="block text-gray-900">Build Your Next</span>
@@ -47,4 +47,4 @@ export default function Home() {
             </div>
         </div>
     )
-}
+}   
