@@ -2,6 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Contact() {
+    const handleSend = (e) => {
+        e.preventDefault();
+        console.log("Message sent!");
+        alert("Thank you for your message. We will get back to you soon!");
+    };
+
     return (
         <div className="max-w-5xl mx-auto px-4 py-20 flex flex-col items-center">
             <div className="text-center mb-12">
@@ -18,11 +24,11 @@ export default function Contact() {
                     <div className="space-y-4">
                         <div className="flex items-center gap-4 text-gray-700 font-medium">
                             <span className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">📍</span>
-                            Mumbai, India
+                            Gujarat, India
                         </div>
                         <div className="flex items-center gap-4 text-gray-700 font-medium">
                             <span className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600">✉️</span>
-                            hello@geminiaiapp.com
+                            suportingsystem@gmail.com
                         </div>
                     </div>
                 </div>
@@ -37,7 +43,7 @@ export default function Contact() {
                     <div>
                         <textarea className="w-full bg-gray-50 border border-gray-200 rounded-xl px-5 py-4 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all outline-none h-32 resize-none" placeholder="How can we help?" required></textarea>
                     </div>
-                    <button className="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all hover:scale-[1.02] active:scale-[0.98]" type="submit">
+                    <button className="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all hover:scale-[1.02] active:scale-[0.98]" type="submit" onClick={handleSend}>
                         Send Message
                     </button>
                     <div className="text-center mt-4">
