@@ -1,58 +1,57 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Login() {
+export default function Demo() {
+    const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
-        setError("");
-
         try {
-            const response = await fetch("http://localhost:5000/login", {
+            const response = await fetch("http://localhost:5000/user", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ name, email, password }),
             });
 
-            const data = await response.json();
-
             if (response.ok) {
-                // Store token and user info
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user));
-
-                alert("Login successful!");
-                navigate("/"); // Redirect to home
+                alert("User created successfully!");
+                setName("");
+                setEmail("");
+                setPassword("");
             } else {
-                setError(data.message || "Invalid credentials");
+                alert("Error creating user");
             }
         } catch (error) {
             console.error("Error:", error);
-            setError("Connection error. Please try again.");
-        } finally {
-            setLoading(false);
+            alert("Error creating user");
         }
     };
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center p-4">
-            <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
+            <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md transform transition-all hover:scale-[1.01]">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h1>
-                    <p className="text-gray-600">Please enter your details</p>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h1>
+                    <p className="text-gray-600">Join our community today</p>
                 </div>
 
-                {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded-xl mb-4 text-sm font-medium">{error}</div>}
-
                 <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                    <div className="space-y-1">
+                        <label className="text-sm font-medium text-gray-700 ml-1">Full Name</label>
+                        <input
+                            type="text"
+                            placeholder="John Doe"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all bg-white/50"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-700 ml-1">Email Address</label>
                         <input
@@ -79,18 +78,14 @@ export default function Login() {
 
                     <button
                         type="submit"
-                        disabled={loading}
-                        className={`w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-xl shadow-lg transition-all active:scale-[0.98] mt-2 ${loading ? 'opacity-70 cursor-not-allowed' : 'hover:from-indigo-700 hover:to-purple-700'}`}
+                        className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold py-3 rounded-xl shadow-lg hover:from-indigo-700 hover:to-purple-700 transition-all active:scale-[0.98] mt-2"
                     >
-                        {loading ? 'Logging in...' : 'Login'}
+                        Register Now
                     </button>
                 </form>
 
                 <div className="mt-8 pt-6 border-t border-gray-100 text-center">
-                    <p className="text-gray-600 text-sm mb-4">
-                        Don't have an account? <Link to="/register" className="text-indigo-600 hover:underline font-semibold">Register here</Link>
-                    </p>
-                    <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors text-sm">
+                    <Link to="/" className="text-indigo-600 hover:text-indigo-800 font-medium transition-colors">
                         ← Back to Home
                     </Link>
                 </div>

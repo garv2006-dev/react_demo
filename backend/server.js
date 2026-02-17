@@ -1,60 +1,62 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
 const express = require("express");
 const app = express();
-const port = 5000;
+const port = process.env.SERVER_PORT || 5000;
 const cors = require("cors");
-const dotenv = require("dotenv");
 const { db } = require("./db");
-const User = require("./model/user");
+const auth = require("./Middleware/auth");
+const userController = require("./controller/usercontroller");
 
-dotenv.config();
+// Global error handlers
+process.on("unhandledRejection", (reason, promise) => {
+    console.error("Unhandled Rejection at:", promise, "reason:", reason);
+});
+
+process.on("uncaughtException", (err) => {
+    console.error("Uncaught Exception thrown:", err);
+    process.exit(1);
+});
 
 app.use(cors());
 app.use(express.json());
 
-db();
+// Routes
+app.get("/user", auth, userController.getUser);
+app.post("/user", userController.createUser);
+app.post("/login", userController.loginUser);
+app.put("/user/:id", auth, userController.updateUser);
+app.delete("/user/:id", auth, userController.deleteUser);
 
-app.get("/user", (req, res) => {
-    res.send("Hello User!");
-});
-
-app.post("/user", async (req, res) => {
+const startServer = async () => {
     try {
-        await User.create(req.body);
-        res.status(201).send("User created!");
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
+        await db();
 
-app.put("/user/:id", async (req, res) => {
-    try {
-        const [updated] = await User.update(req.body, {
-            where: { id: req.params.id }
+        const server = app.listen(port, () => {
+            console.log(`🚀 API is live at http://localhost:${port}`);
         });
-        if (!updated) {
-            return res.status(404).send("User not found");
-        }
-        res.send("User updated!");
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-});
 
-app.delete("/user/:id", async (req, res) => {
-    try {
-        const deleted = await User.destroy({
-            where: { id: req.params.id }
+        server.on("error", (error) => {
+            if (error.code === "EADDRINUSE") {
+                console.error(`❌ Port ${port} is already in use. Please kill the process manually.`);
+                process.exit(1);
+            } else {
+                console.error("❌ Server error:", error);
+            }
         });
-        if (!deleted) {
-            return res.status(404).send("User not found");
-        }
-        res.send("User deleted!");
+
+        // Keep the process alive explicitly if needed (though app.listen should do it)
+        setInterval(() => {
+            if (server.listening) {
+                // Just a heartbeat to ensure the event loop has work
+            }
+        }, 60000);
+
     } catch (error) {
-        res.status(500).send(error.message);
+        console.error("❌ Failed to initiate startup:", error);
+        process.exit(1);
     }
-});
+};
 
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-});
+startServer();
