@@ -1,38 +1,49 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function home() {
+export default function Home() {
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <div className="text-center space-y-8">
-                <h1 className="text-4xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-                    Home Page
-                </h1>
-                <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Welcome to our premium platform. Experience the power of modern design and seamless responsiveness.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4 pt-4">
-                    <Link to="/login" className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 hover:shadow-indigo-200 transition-all hover:scale-105 active:scale-95">
-                        Get Started
-                    </Link>
-                    <Link to="/demo" className="px-8 py-3 bg-white text-indigo-600 font-semibold rounded-xl shadow-md border border-indigo-100 hover:bg-gray-50 transition-all hover:scale-105 active:scale-95">
-                        View Demo
-                    </Link>
-                </div>
-            </div>
-
-            <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                    { title: "Responsive", desc: "Perfectly sized for every screen, from mobile to desktop.", icon: "📱" },
-                    { title: "Premium", desc: "Aesthetic designs that wow your users at first glance.", icon: "✨" },
-                    { title: "Fast", desc: "Optimized for speed and smooth performance.", icon: "🚀" }
-                ].map((feature, i) => (
-                    <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                        <div className="text-4xl mb-4">{feature.icon}</div>
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
-                        <p className="text-gray-600">{feature.desc}</p>
+        <div className="min-h-[calc(100vh-64px)] flex flex-col justify-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div className="text-center space-y-10">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-sm font-bold mb-4 animate-bounce">
+                        ✨ New: Gemini AI Integration
                     </div>
-                ))}
+                    <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight">
+                        <span className="block text-gray-900">Build Your Next</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-300% animate-gradient">
+                            Big Idea with AI
+                        </span>
+                    </h1>
+                    <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                        Experience the fusion of high-performance engineering and futuristic AI.
+                        Generate project blueprints, code snippets, and creative assets in seconds.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-6 pt-6">
+                        <Link to="/create-project" className="px-10 py-4 bg-indigo-600 text-white font-bold rounded-2xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 active:scale-95 transition-all">
+                            Start Creating
+                        </Link>
+                        <Link to="/demo" className="px-10 py-4 bg-white text-gray-900 font-bold rounded-2xl shadow-lg border border-gray-100 hover:bg-gray-50 hover:scale-105 active:scale-95 transition-all">
+                            Live Demo
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-10">
+                    {[
+                        { title: "AI-Powered", desc: "Harness the power of Google Gemini to generate high-quality project starters.", icon: "🧠" },
+                        { title: "Premium Visuals", desc: "Designed with a focus on aesthetics, glassmorphism, and smooth animations.", icon: "💎" },
+                        { title: "Fast Workflow", desc: "Go from idea to design in seconds with our optimized AI pipelines.", icon: "⚡" }
+                    ].map((feature, i) => (
+                        <div key={i} className="group bg-white p-10 rounded-3xl shadow-sm border border-gray-100 hover:shadow-2xl hover:border-indigo-100 transition-all duration-500 transform hover:-translate-y-3">
+                            <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover:scale-110 transition-transform duration-500">
+                                {feature.icon}
+                            </div>
+                            <h3 className="text-2xl font-bold text-gray-800 mb-4">{feature.title}</h3>
+                            <p className="text-gray-600 leading-relaxed">{feature.desc}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )
