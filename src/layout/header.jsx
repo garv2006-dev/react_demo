@@ -26,6 +26,7 @@ export default function Header() {
                         <Link to="/" className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Home</Link>
                         <Link to="/contact" className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Contact</Link>
                         <Link to="/demo" className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Demo</Link>
+                        <Link to="/feed" className="text-gray-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-colors">Feed</Link>
                     </div>
                     <div className="flex items-center">
                         {token ? (

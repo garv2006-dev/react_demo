@@ -9,6 +9,7 @@ import Header from './layout/header';
 import Footer from './layout/footer';
 import Login from './page/login';
 import Register from './page/register';
+import Feed from './page/feed';
 
 function Layout() {
   return (
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />
+      },
+      {
+        path: "/feed",
+        element: <Feed />
       },
 
     ]
