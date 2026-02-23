@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import insforge from "./insforge";
 import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
 import Home from './page/home';
 import Demo from './page/demo';
@@ -7,14 +9,6 @@ import Header from './layout/header';
 import Footer from './layout/footer';
 import Login from './page/login';
 import Register from './page/register';
-
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    return <Navigate to="/login" replace />;
-  }
-  return children;
-}
 
 function Layout() {
   return (
@@ -58,7 +52,18 @@ const router = createBrowserRouter([
   }
 ])
 
+
+
 function App() {
+  useEffect(() => {
+    insforge.auth.getCurrentSession().then(({ data }) => {
+      if (data?.session) {
+        localStorage.setItem("token", data.session.accessToken);
+        localStorage.setItem("user", JSON.stringify(data.session.user));
+      }
+    }).catch(console.error);
+  }, []);
+
   return (
     <div className="App min-h-screen bg-gray-50 font-sans antialiased text-gray-900">
       <RouterProvider router={router} />
